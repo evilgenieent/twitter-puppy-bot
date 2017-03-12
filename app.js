@@ -3,8 +3,6 @@ const config = require('./config');
 const bodyParser = require('body-parser');
 const Twit = require('twit');
 const T = new Twit(config);
-const request = require('request');
-const exec = require('child_process').exec;
 const fs = require('fs');
 const app = express();
 
