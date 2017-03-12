@@ -1,6 +1,6 @@
 # Twitter: Puppy Sleep Helper Bot
 
-This twitter bot searches for users who cannot sleep and responds with a random picture of a puppy :)
+An Express.js twitter bot that searches for users who cannot sleep and responds with a random picture of a puppy :)
 
 
 Future expansion:
