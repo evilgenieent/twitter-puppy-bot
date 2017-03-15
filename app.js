@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 function tweet() {
     T.get('search/tweets', { q: 'i cant sleep', result_type: 'recent' }, function(err, data) {
         var userName = data.statuses[0].user.screen_name;
-        // console.log(data.statuses[0]);
+        console.log(data.statuses[0].text);
 
         if (data.statuses[0].in_reply_to_user_id !== null ? console.log('it was a retweet') : processing());
 
@@ -52,6 +52,11 @@ function tweet() {
     });
 }
 
-tweet();
-var dayInMilliseconds = 1000 * 60 * 60 * 24;
-setInterval(tweet, dayInMilliseconds / 5);
+setInterval(function() {
+  try {
+    tweet();
+  }
+  catch (e) {
+    console.log(e);
+  }
+}, 60000* 60);

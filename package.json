@@ -1,7 +1,7 @@
 {
-  "name": "twitter-bot",
+  "name": "puppy-sleep-bot",
   "version": "1.0.0",
-  "description": "twitter bot fun times",
+  "description": "A twitter bot that sends pictures of puppies to people who cannot sleep :)",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
