@@ -2,7 +2,15 @@ const express = require('express');
 const config = require('./config');
 const bodyParser = require('body-parser');
 const Twit = require('twit');
-const T = new Twit(config);
+const T = new Twit(
+{
+    consumer_key:         process.env.BOT_CONSUMER_KEY,
+    consumer_secret:      process.env.BOT_CONSUMER_SECRET,
+    access_token:         process.env.BOT_ACCESS_TOKEN,
+    access_token_secret:  process.env.BOT_ACCESS_TOKEN_SECRET,
+    timeout_ms:           60*1000
+}
+);
 const fs = require('fs');
 const app = express();
 
