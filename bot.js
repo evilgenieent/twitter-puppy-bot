@@ -1,15 +1,15 @@
 const express = require('express');
-const config = require('./config');
 const bodyParser = require('body-parser');
 const Twit = require('twit');
-const T = new Twit(
-{
-    consumer_key:         process.env.BOT_CONSUMER_KEY,
-    consumer_secret:      process.env.BOT_CONSUMER_SECRET,
-    access_token:         process.env.BOT_ACCESS_TOKEN,
-    access_token_secret:  process.env.BOT_ACCESS_TOKEN_SECRET,
-    timeout_ms:           60*1000
-}
+const TwitterBot = require('node-twitterbot').TwitterBot;
+const Bot = new TwitterBot(
+    {
+        consumer_key:         process.env.BOT_CONSUMER_KEY,
+        consumer_secret:      process.env.BOT_CONSUMER_SECRET,
+        access_token:         process.env.BOT_ACCESS_TOKEN,
+        access_token_secret:  process.env.BOT_ACCESS_TOKEN_SECRET,
+        timeout_ms:           60*1000
+    }
 );
 const fs = require('fs');
 const app = express();
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 
 function tweet() {
-    T.get('search/tweets', { q: 'i cant sleep', result_type: 'recent' }, function(err, data) {
+    Bot.get('search/tweets', { q: 'i cant sleep', result_type: 'recent' }, function(err, data) {
         var userName = data.statuses[0].user.screen_name;
         console.log(data.statuses[0].text);
 
@@ -34,7 +34,7 @@ function tweet() {
             }
             var b64 = fs.readFileSync(filename, params);
 
-            T.post('media/upload', { media_data: b64 }, uploaded);
+            Bot.post('media/upload', { media_data: b64 }, uploaded);
 
             function uploaded(err, data, response) {
 
@@ -44,7 +44,7 @@ function tweet() {
                     media_ids: [id]
                 }
 
-                T.post('statuses/update', tweet, tweeted);
+                Bot.post('statuses/update', tweet, tweeted);
 
                 function tweeted(err, data, response) {
                     if (err) {
